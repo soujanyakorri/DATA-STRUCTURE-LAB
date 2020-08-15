@@ -1,0 +1,222 @@
+[1]Write a C Program for Linear Search using non-recursion
+#include<stdio.h>
+int linear_search(int n,int a[50],int key_element)
+{Write 
+    int i,pos=-1;
+    for(i=0;i<n;i++)
+    {
+        if(a[i]==key_element)
+        {
+            pos=i;
+            break;
+        }
+    }
+    return pos;
+}
+int main()
+{
+    int i,pos,n,key_element,a[50];
+    printf("Enter the number of elements in tha array ");
+    scanf("%d",&n);
+    printf("Enter the numbers ");
+    for(i=0;i<n;i++)
+    scanf("%d",&a[i]);
+    printf("Enter The key element to be searched ");
+    scanf("%d",&key_element);
+    pos=linear_search(n,a,key_element);
+    if(pos==-1)
+               {
+        printf("NOT FOUND");
+    }
+    else
+    {
+
+        printf("\n Element found at position %d",pos+1);
+    }
+}
+           --->OUTPUT
+Enter the number of elements in tha array 6
+Enter the numbers 1
+6
+4
+5
+2
+8
+Enter The key element to be searched 5
+
+ Element found at position 4
+
+
+
+[2]Write a C Program for Linear Search using recursion
+#include<stdio.h>
+int linear_search(int a[10],int n,int key_element)
+{
+    static int i=0;
+    if(a[i]==key_element)
+    {
+        return i;
+    }
+    else if(i<n)
+    {
+        i++;
+        linear_search(a,n,key_element);
+    }
+
+    else
+    {
+        return -1;
+    }
+}
+int main()
+{
+    int n,key_element,pos,i,a[50];
+    printf("Enter the number of elements in the array ");
+    scanf("%d",&n);
+    printf("Enter the elements ");
+    for(i=0;i<n;i++)
+    scanf("%d",&a[i]);
+    printf("Enter the number has to be searched ");
+    scanf("%d",&key_element);
+    pos=linear_search(a,n,key_element);
+    if(pos==-1)
+    {
+        printf("NOT FOUND");
+    }
+    else
+    {
+        printf("The element is found at %d",pos+1);
+    }
+}
+--->OUTPUT
+Enter the number of elements in the array 5
+Enter the elements 7
+4
+5
+6
+4
+Enter the number has to be searched 5
+The element is found at 3
+Process returned 0 (0x0
+
+
+
+[3]Write a C Program for Binary Search using non-recursion
+#include<stdio.h>
+int binary_search(int beg,int end,int a[50],int key_element)
+{
+    int mid,pos=-1;
+    while(beg<=end)
+    {
+        mid=(beg+end)/2;
+        if(a[mid]==key_element)
+        {
+            pos=mid;
+            break;
+        }
+        if(a[mid]<key_element)
+        {
+            beg=mid+1;
+        }
+        else
+        {
+            end=mid-1;
+        }
+    }
+    return pos;
+}
+int main()
+{
+    int i,n,pos,key_element,a[50];
+    printf("Enter number of elements in the array\n ");
+    scanf("%d",&n);
+    printf("Enter the elements\n ");
+    for(i=0;i<n;i++)
+    scanf("%d",&a[i]);
+    printf("Enter the key element to search\n ");
+    scanf("%d",&key_element);
+
+    pos=binary_search(0,n-1,a,key_element);
+    if(pos==-1)
+    {
+        printf("NOT FOUND");
+    }
+    else
+    {
+        printf("The element found at position: %d\n",pos+1);
+    }
+}
+
+--->OUTPUT
+Enter number of elements in the array
+ 5
+Enter the elements
+ 3
+4
+5
+6
+9
+Enter the key element to search
+ 4
+The element found at position: 2
+
+[4]Write a C Program for Binary Search using recursion
+#include<stdio.h>
+int binary_search(int beg,int end,int a[50],int key_element)
+{
+    int mid;
+    if(beg<=end)
+    {
+        mid=(beg+end)/2;
+        if(a[mid]==key_element)
+        {
+            return mid;
+        }
+        else if(a[mid]<key_element)
+        {
+             binary_search(mid+1,end,a,key_element);
+        }
+        else
+        {
+             binary_search(beg,mid-1,a,key_element);
+        }
+    }
+    else
+    {
+        return -1;
+    }
+}
+int main()
+{
+    int i,n,key_element,pos,a[50];
+    printf("Enter the number of elements in the array ");
+    scanf("%d",&n);
+    printf("Enter the elements ");
+    for(i=0;i<n;i++)
+    scanf("%d",&a[i]);
+    printf("Enter the key element to search ");
+    scanf("%d",&key_element);
+    pos=binary_search(0,n-1,a,key_element);
+    if(pos==-1)
+    {
+        printf("NOT FOUND");
+    }
+    else
+    {
+        printf("Element found at position %d",pos+1);
+
+    }
+}
+
+--->OUTPUT
+Enter the number of elements in the array 6
+Enter the elements 1
+2
+3
+5
+9
+12
+Enter the key element to search 5
+Element found at position 4
+
+
