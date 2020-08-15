@@ -1,0 +1,127 @@
+[2]C Program to store information of students using Structures 
+#include<stdio.h>
+struct student
+{
+    int roll_num;
+    char name[20];
+    float marks;
+};
+int main()
+{
+    struct student stud[50];
+    int i,n;
+    printf("Enter the number of students: ");
+               scanf("%d",&n);
+               for(i=1;i<=n;i++)
+    {
+
+        printf("Enter student roll number: ");
+        scanf("%d",&stud[i].roll_num);
+                    printf("Enter student name: ");
+        scanf("%s",&stud[i].name);
+        printf("Enter the marks: ");
+        scanf("%f",&stud[i].marks);
+
+    }
+    for(i=1;i<=n;i++)
+    {
+        printf("\n_____________INFORMATION OF STUDENT___________: %d",i);
+
+        printf("\n  ROLL NUM = %d",stud[i].roll_num);
+                   printf("\n  NAME = %s",stud[i].name);
+        printf("\n  MARKS = %f",stud[i].marks);
+    }
+    return 0;
+}
+
+-->OUTPUT
+Enter the number of students: 2
+
+Enter student roll_num:1
+Enter student name: justin
+Enter the marks: 456
+Enter the student roll_num: 2
+Enter student name: soujanya
+Enter the marks:455
+____________INFORMATION OF STUDENT____________1:	
+ROLL NUM = 1
+NAME = justin
+MARKS = 456
+____________INFORMATION OF STUDENT____________2:
+ROLL NUM = 2
+NAME =  soujanya
+MARKS = 455
+
+
+
+____________________________________________________________________________
+[1 ].  C Program to Add Two Complex Numbers  by Passing Structure to a Function
+ #include<stdio.h>
+struct complex
+{
+    int real;
+    int imaginary;
+};
+
+int main()
+{
+    struct complex compc1,compc2,add,sub,mult;
+    printf("Enter real & imaginary parts of first_comp.numbers--> \n");
+    scanf("%d%d",&compc1.real,&compc1.imaginary);
+    printf("Enter real & imaginary parts of second_comp.numbers--> \n");
+    scanf("%d%d",&compc2.real,&compc2.imaginary);
+    printf("\nADD = (%d)+(%di)",compc1.real+compc2.real,compc1.imaginary+compc2.imaginary);
+    printf("\nSUB = (%d)-(%di)",compc1.real-compc2.real,compc1.imaginary-compc2.imaginary);
+    printf("\nMULT = (%d)*(%di)",compc1.real*compc2.real,compc1.imaginary*compc2.imaginary);
+}
+
+-->OUTPUT 
+Enter real & imaginary parts of first_comp.numbers-->
+8
+5
+Enter real & imaginary parts of second_comp.numbers-->
+5
+3
+ADD = (13)+(8i)
+SUB = (3)-(2i)
+MULT = (40)*(15i)
+______________________________________________________________________
+[3].Write a C program to node with data and link using self referential structures
+#include<stdio.h>
+struct node
+{
+    int data;
+    struct node*link;
+};
+int main()
+{
+    struct node*s;
+    s=(struct node*)malloc(sizeof(struct node));
+    s->data=20;
+    s->link=NULL;
+    printf("data=%d",s->data);
+}
+-->OUTPUT = 20
+______________________________________________________________________
+[4]Write a C program to node with data and two link using self referential structures
+
+ #include<stdio.h>
+  struct node
+{
+   float data;
+    struct node*prev;
+    struct node*next;
+};
+int main()
+{
+    struct node*s;
+    s=(struct node*)malloc(sizeof(struct node));
+    s->data=100;
+    s->prev=NULL;
+    s->next=NULL;
+    printf("data=%f",s->data);
+}
+--> OUTPUT = 100
+
+
+
