@@ -1,0 +1,127 @@
+1.Bubble sort
+#include<stdio.h>
+void bubble_sort(int a[100],int n)
+{
+    int i,j,t;
+    for(i=0;i<n-1;i++)
+    {
+        for(j=0;j<n-i-1;j++)
+        {
+            if(a[j]>a[j+1])
+            {
+                t=a[j];
+                a[j]=a[j+1];
+                a[j+1]=t;
+            }
+        }
+    }
+
+}
+int main()
+{
+    int n,i;
+    printf("Enter the array number ");
+    scanf("%d",&n);
+    int a[n];
+    printf("Enter the array numbers ");
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    bubble_sort(a,n);
+    for(i=0;i<n;i++)
+        printf("%d\t",a[i]);
+
+}
+
+--->OUTPUT
+Enter the array number 5
+Enter the array numbers 50
+20
+10
+90
+30
+10      20      30      50      90
+____________________________________________________________________________
+
+2.insertion sort
+#include<stdio.h>
+void insertion_sort(int a[100],int n)
+{
+    int i,j,index;
+    for(i=0;i<n;i++)
+    {
+        index=a[i];
+        j=i;
+        while(j>0 && a[j-1]>index)
+        {
+            a[j]=a[j-1];
+            j=j-1;
+        }
+        a[j]=index;
+    }
+}
+int main()
+{
+    int n,i;
+    printf("Enter the array number ");
+    scanf("%d",&n);
+    int a[100];
+    printf("Enter the numbers in the array ");
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+    insertion_sort(a,n);
+    for(i=0;i<n;i++)
+        printf("%d\t",a[i]);
+}
+
+--->OUTPUT
+Enter the array number 5
+Enter the numbers in the array 100
+50
+20
+45
+60
+20      45      50      60      100
+______________________________________________________
+3.selection sort
+#include<stdio.h>
+void selection_sort(int a[50],int n)
+{
+    int i,j,t,min;
+    for(i=0;i<n-1;i++)
+    {
+        min=i;
+        for(j=i+1;j<n;j++)
+        {
+            if(a[j]<a[min])
+                min=j;
+        }
+         t=a[i];
+         a[i]=a[min];
+         a[min]=t;
+    }
+
+}
+int main()
+{
+    int n,i;
+    printf("Enter the array number ");
+    scanf("%d",&n);
+    int a[n];
+    printf("Enter the numbers in the array ");
+    for(i=0;i<n;i++)
+        scanf("%d",&a[i]);
+    selection_sort(a,n);
+    for(i=0;i<n;i++)
+        printf("%d\t",a[i]);
+}
+
+--->OUTPUT
+Enter the array number 5
+Enter the numbers in the array 23
+45
+62
+85
+12
+12      23      45      62      85
