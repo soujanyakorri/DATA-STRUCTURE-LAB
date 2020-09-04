@@ -1,0 +1,356 @@
+//PROGRAM FOR SINGLY LINKED LIST
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node*link;
+};
+struct node *head=NULL,*tail=NULL,*cur,*next,*prev,*t1,*t2;
+void create()
+{
+    int i,n;
+    printf("Enter the number of nodes: ");
+    scanf("%d",&n);
+    for(i=1;i<=n;i++)
+    {
+        cur=(struct node*)malloc(sizeof(struct node));
+        printf("Enter current node data: ");
+        scanf("%d",&(cur->data));
+        cur->link=NULL;
+        if(head==NULL)
+            head=tail=cur;
+        else
+            {
+            tail->link=cur;
+            tail=cur;
+            }
+    }
+}
+
+void display()
+{
+    if(head==NULL)
+        printf("List is empty");
+    else
+    {
+        next=head;
+        while(next!=NULL)
+        {
+            printf("%d -> ",next->data);
+            next=next->link;
+        }
+        printf("NULL \n");
+    }
+
+}
+void insert_at_begin()
+{
+    cur=(struct node*)malloc(sizeof(struct node));
+    printf("Enter new begining node data: \n");
+    scanf("%d",&cur->data);
+    cur->link=head;
+    head=cur;
+
+}
+void insert_at_end()
+{
+    cur=(struct node*)malloc(sizeof(struct node));
+    printf("Enter new ending node data: \n");
+    scanf("%d",&(cur->data));
+    cur->link=NULL;
+    tail->link=cur;
+    tail=cur;
+}
+void insert_before_node()
+{
+    cur=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the data: ");
+    scanf("%d",&(cur->data));
+    int value;
+    printf("Enter the value before which the data has to be inserted: ");
+    scanf("%d",&value);
+    next=head;
+    while(next->data!=value && next!=NULL)
+    {
+        prev=next;
+        next=next->link;
+    }
+    prev->link=cur;
+    cur->link=next;
+
+}
+void insert_after_node()
+{
+    cur=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the data: ");
+    scanf("%d",&(cur->data));
+    int value;
+    printf("Enter after which node we need insert: ");
+    scanf("%d",&value);
+    next=head;
+    while(next->data!=value && next!=NULL)
+    {
+        next=next->link;
+    }
+    cur->link=next->link;
+    next->link=cur;
+}
+void insert_at_position()
+{
+    int pos,c=1;
+    cur=(struct node*)malloc(sizeof(struct node));
+    printf("Enter new node data to be stored at a position: ");
+    scanf("%d",&(cur->data));
+    printf("Enter position: ");
+    scanf("%d",&pos);
+    next=head;
+    while(c < pos)
+    {
+        prev=next;
+        next=next->link;
+        c++;
+    }
+    prev->link=cur;
+    cur->link=next;
+}
+
+void delete_at_begin()
+{
+    cur=head;
+    head=cur->link;
+    cur->link=NULL;
+    printf("Deleted Element Is: %d\n",cur->data);
+    free(cur);
+}
+void delete_at_end()
+{
+    cur=head;
+    while(cur->link!=tail)
+        cur=cur->link;
+    cur->link=NULL;
+    next=tail;
+    printf("Deleted Element Is: %d",cur->data);
+    free(next);
+    tail=cur;
+}
+void delete_before_node()
+{
+    int value;
+    printf("Enter the value of node to perform delete before: ");
+    scanf("%d",&value);
+    next=head;
+    while(next->link->data!=value)
+    {
+        prev=next;
+        next=next->link;
+    }
+    prev->link=next->link;
+    next->link=NULL;
+    printf("Deleted element is: %d\n",next->data);
+}
+
+void delete_after_node()
+{
+    int value;
+    printf("Enter value of the node to perform delete after: ");
+    scanf("%d",&value);
+    next=head;
+    while(next->data!=value)
+    {
+        prev=next;
+        next=next->link;
+    }
+    prev=next->link;
+    next->link=prev->link;
+    prev->link=NULL;
+    printf("Deleted element is: %d\n",prev->data);
+    free(prev);
+}
+
+void delete_at_position()
+{
+    next=head;
+    int pos;
+    printf("Enter the position");
+    scanf("%d",&pos);
+    int c=1;
+    while(c < pos)
+    {
+        prev=next;
+        next=next->link;
+        c++;
+    }
+    prev->link=next->link;
+    printf("Deleted Element Is: %d\n",next->data);
+    next->link=NULL;
+    free(next);
+}
+void reverse(struct node *head)
+{
+    if(head!=NULL)
+    {
+        reverse(head->link);
+        printf(" <- %d",head->data);
+    }
+    else
+        printf("NULL");
+}
+void reverse_array()
+{
+    int a[100],i=0;
+    cur=head;
+    while(cur!=NULL)
+    {
+        a[i++]=cur->data;
+        cur=cur->link;
+    }
+    while(i-1>0)
+    {
+        printf(" <- %d",a[i]);
+        i--;
+    }
+}
+
+void search_for_element()
+{
+    int value,flag=0,c=0;
+    printf("Enter the value to be searched: ");
+    scanf("%d",&value);
+    next=head;
+    while(next!=NULL)
+    {
+        if(next->data==value)
+        {
+            flag=1;
+            break;
+        }
+        next=next->link;
+        c++;
+    }
+    if(flag==0)
+        printf("Element present in the list at %d position",c);
+    else
+        printf("Elemenet not present");
+}
+void sorting()
+{
+    struct node*p1,*p2;
+    int temp;
+    p1=head;
+    while(p1!=NULL)
+    {
+        p2=p1->link;
+        while(p2!=NULL)
+        {
+            if(p2->data>p2->link->data)
+            {
+                temp=p2->data;
+                p2->data=p2->link->data;
+                p2->link->data=temp;
+            }
+            p2=p2->link;
+        }
+        p1=p1->link;
+    }
+}
+void bubble_sorting()
+{
+    struct node *p1,*p2;
+    int temp,c=0,i;
+    p1=head;
+    while(p1!=NULL)
+    {
+        c++;
+        p1=p1->link;
+    }
+    for(i=0;i<c;i++)
+    {
+        p2=head;
+        while(p2->link!=NULL)
+        {
+            if(p2->data > p2->link->data)
+            {
+                temp=p2->data;
+                p2->data=p2->link->data;
+                p2->link->data=temp;
+            }
+            p2=p2->link;
+        }
+
+    }
+
+}
+
+int main()
+{
+    int option;
+    while(1)
+    {
+        printf("\n________Main_Menu_________");
+        printf("\n1:Create a list");
+        printf("\n2:Display a list");
+        printf("\n3:Insert a node at the begin");
+    printf("\n4:Insert a node at the end");
+    printf("\n5:Insert a node before a given node");
+    printf("\n6:Insret a node after a given node");
+    printf("\n7:Insert at position");
+    printf("\n8:Delete from the biginning");
+    printf("\n9:Delete from the end");
+    printf("\n10:Delete before a given node");
+    printf("\n11:Delete after a given node");
+    printf("\n12:Delete at position");
+    printf("\n13:Display in reverse");
+    printf("\n14:Reversing the array");
+    printf("\n15:Soriting");
+    printf("\n16:Searching for an element");
+    printf("\n17:Bubble_sorting");
+    printf("\n18:Exit:");
+    printf("\n______________________________");
+    printf("\nEnter your option: ");
+    scanf("%d",&option);
+    switch(option)
+    {
+    case 1:create();
+            break;
+    case 2:display();
+            break;
+    case 3:insert_at_begin();
+            break;
+    case 4:insert_at_end();
+            break;
+    case 5:insert_before_node();
+            break;
+    case 6:insert_after_node();
+            break;
+    case 7:insert_at_position();
+            break;
+    case 8:delete_at_begin();
+            break;
+    case 9:delete_at_end();
+            break;
+    case 10:delete_before_node();
+            break;
+    case 11:delete_after_node();
+            break;
+    case 12:delete_at_position();
+            break;
+    case 13:reverse(head);
+            break;
+    case 14:reverse_array();
+            break;
+    case 15:search_for_element();
+            break;
+    case 16:sorting();
+            break;
+    case 17:bubble_sorting();
+            break;
+    case 18:exit(0);
+    default: printf("Invalid Entry");
+     return 0;
+
+
+    }
+
+    }
+}
