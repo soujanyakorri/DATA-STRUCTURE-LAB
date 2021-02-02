@@ -1,0 +1,331 @@
+//circular queue using array
+#include<stdio.h>
+#include<stdlib.h>
+# define maxsize 5
+int cqueue[maxsize];
+int f = -1, r = -1;
+int isfull()
+{
+	if(f==(r+1)%maxsize)
+	return 1;
+	else
+	return 0;
+}
+int isempty()
+{
+	if(f==-1)
+	return -1;
+	else
+	return 0;
+}
+
+void enqueue(int data)
+{
+    	if(f ==(r+1)%maxsize)
+        	printf("Circular Queue Overflow\n");
+    	else if(f == -1){
+		f=r= 0;
+		cqueue[r]=data;
+	}
+    	else{
+		r= (r+1)%maxsize;
+		cqueue[r]=data;
+	}
+}
+void dequeue()
+{
+	if(f == -1)
+	{
+        	printf("Circular Queue Underflow\n");
+    	}
+	else if(f==r)
+	{
+		printf("deleted element is : %d\n",cqueue[f]);
+		f=r=-1;
+	}
+    	else
+    	{
+        	printf("deleted element is : %d\n",cqueue[f]);
+		f=(f+1)%maxsize;
+    	}
+}
+
+void display()
+{
+	int i=f;
+	if(isempty())
+		printf("Circular queue is empty");
+	else
+	{
+		while(i!=r)
+		{
+			printf("%d\t",cqueue[i]);
+			i=(i+1)%maxsize;
+		}
+		printf("%d\t",cqueue[i]);
+	}
+}
+int main()
+{
+    int ch,x;
+    while(1)
+	{
+	printf("\nPROGRAM FOR CIRCULAR QUEUE\n");
+        printf("1.Enqueue\n");
+        printf("2.Dequeue\n");
+        printf("3.Display\n");
+        printf("4.EXIT\n");
+        printf("Enter your choice : ");
+        scanf("%d",&ch);
+    switch(ch)
+        {
+		case 1 :if(isfull())
+			printf("circular queue is overflow");
+		    	else
+			{
+				printf("Enter data for insertion : ");
+                    		scanf("%d", &x);
+                    		enqueue(x);
+			}
+                    	break;
+		case 2 :if(isempty())
+			printf("circular queue is undeflow");
+		    	else
+			{
+                    		dequeue(x);
+			}
+                    	break;
+            	case 3 :display();
+                    	break;
+            	case 4 :exit(0);
+        }
+	}
+}
+____________________________________________________
+// circular queue using linked list
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+	int data;
+	struct node*link;
+};
+struct node *f=NULL,*r=NULL,*cur;
+void enqueue()
+{
+	cur=(struct node*)malloc(sizeof(struct node));
+	printf("enter data to insert:\n");
+	scanf("%d",&cur->data);
+	cur->link=NULL;
+	if(f==NULL)
+	{
+		cur->link=cur;
+		f=r=cur;
+	}
+	else
+	{
+		r->link=cur;
+		cur->link=f;
+		r=cur;
+	}
+}
+void dequeue()
+{
+	if(f==NULL)
+		printf("Circular queue underflow\n");
+	else if(f==r)
+	{
+		printf("deleted data %d\n",f->data);
+		f=r=NULL;
+	}
+	else
+	{
+		cur=f;
+		f=f->link;
+		r->link=f;
+		printf("deleted data: %d\n",cur->data);
+		free(cur);
+	}
+}
+void display()
+{
+	if(f==NULL)
+		printf(" Circular queue is empty");
+	else
+	{
+		cur=f;
+		while(cur->link!=f)
+		{
+			printf("%d->",cur->data);
+			cur=cur->link;
+		}
+		printf("%d->",cur->data);
+	}
+}
+
+int main()
+{
+	int ch;
+	while(1)
+	{
+		printf("\n\n");
+		printf("PROGRAM FOR CIRCULAR QUEUE\n");
+		printf("\n1-enqueue\n2-dequeue\n3-display\n4-exit\n");
+		printf("Enter your choice:\n");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+		case 1: enqueue();
+			break;
+		case 2: dequeue();
+			break;
+		case 3: display();
+			break;
+		case 4: exit(0);
+		}
+	}
+}
+___________________________________________
+//queue using array
+#include <stdio.h>
+#include <stdlib.h>
+#define maxsize 5
+int f=-1,r=-1,i,queue[maxsize];
+int isfull(){
+	if(r==maxsize-1)
+	return -1;
+	else
+	return 0;
+}
+int isempty(){
+	if(f==-1)
+	return 1;
+	else
+	return 0;
+}
+void enqueue(int data){
+	if(f==-1)
+		f=0;
+	queue[++r]=data;
+}
+int dequeue(){
+	int x = queue[f];
+	if(f==r)
+	f=r=-1;
+	else
+	f++;
+	return x;
+}
+void display(){
+	for(i=f;i<=r;i++)
+	printf("%d\t",queue[i]);
+}
+
+int main(){
+	int ch,x;
+	while(1){
+	printf("\nPROGRAMS FOR QUEUE");
+	printf("\n1-enqueue\n2-dequeue\n3-display\n4-exit\n");
+	printf("Enter your choice:");
+	scanf("%d",&ch);
+	switch(ch){
+	case 1: if(isfull())
+		printf("queue overflow\n");
+		else{
+		printf("enter data to insert:");
+		scanf("%d",&x);
+		enqueue(x);
+		}
+		break;
+	case 2: if(isempty())
+		printf("queue underflow\n");
+		else if(f!=r)
+		printf("deleted element %d \n",dequeue());
+		else{
+		printf("deleted element %d \n",dequeue());
+		if(f==r)
+		f=r=-1;
+		}
+		break;
+	case 3: display();
+		break;
+	case 4: exit(0);
+		}
+	}
+}
+_________________________________________________________
+//queue using sll
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+	int data;
+	struct node*link;
+};
+struct node*f=NULL,*r=NULL,*cur;
+void enqueue()
+{
+	cur=(struct node*)malloc(sizeof(struct node));
+	printf("enter data to insert:\n");
+	scanf("%d",&cur->data);
+	cur->link=NULL;
+	if(f==NULL)
+		f=r=cur;
+	else
+	{
+		r->link=cur;
+		r=cur;
+	}
+}
+void dequeue()
+{
+	if(f==NULL)
+	printf("queue underflow\n");
+	else if(f==r)
+	{
+		printf("deleted data: %d\n",f->data);
+		f=r=NULL;
+	}
+	else
+	{
+		cur=f;
+		f=f->link;
+		printf("deleted data: %d\n",cur->data);
+		free(cur);
+	}
+}
+void display()
+{
+	if(f==NULL)
+	printf("queue is empty");
+	else
+	{
+		cur=f;
+		while(cur!=NULL)
+		{
+		printf("%d->",cur->data);
+		cur=cur->link;
+		}
+	}
+}
+
+int main()
+{
+	int ch,x;
+	while(1)
+	{
+		printf("\n1-enqueue\n2-dequeue\n3-display\n4-exit\n");
+		printf("Enter your choice:\n");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+		case 1: enqueue();
+			break;
+		case 2: dequeue();
+			break;
+		case 3: display();
+			break;
+		case 4: exit(0);
+		}
+	}
+}
